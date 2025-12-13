@@ -1,10 +1,10 @@
 /*
-* Pattern -> StartNum - EndNum; separated by commas
-* Invalid Ids:
-* - Sequence of digits
-* - No numbers have leading 0
-* Sum of invalid IDs is the answer
-*/
+ * Pattern -> StartNum - EndNum; separated by commas
+ * Invalid Ids:
+ * - Sequence of digits repeated twice
+ * Sum of invalid IDs is the answer
+ */
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -12,21 +12,49 @@
 
 using namespace std;
 
-int main() {
-    ifstream file;
-    file.open("input.txt");
+bool isRepeatedTwice(long long n)
+{
+    string s = to_string(n);
+    int len = s.length();
 
-    int startNum;
-    int endNum;
-    char hyphen;
+    if (len % 2 != 0)
+        return false;
 
-    if (!file.is_open()) {
+    int halfLen = len / 2;
+    string first = s.substr(0, halfLen);
+    string second = s.substr(halfLen);
+
+    return first == second;
+}
+
+int main()
+{
+    ifstream file("input.txt");
+
+    if (!file.is_open())
+    {
         cout << "Put fries in the bag vro\n";
         return 1;
-    } else {
-        if (file >> startNum >> hyphen >> endNum) {
-            cout << startNum;
-            cout << endNum;
+    }
+
+    long long startNum, endNum;
+    char hyphen, comma;
+    long long sum = 0;
+
+    while (file >> startNum >> hyphen >> endNum)
+    {
+        // optional comma
+        file >> comma;
+
+        for (long long j = startNum; j <= endNum; j++)
+        {
+            if (isRepeatedTwice(j))
+            {
+                sum += j;
+            }
         }
     }
+
+    cout << sum << endl;
+    return 0;
 }
