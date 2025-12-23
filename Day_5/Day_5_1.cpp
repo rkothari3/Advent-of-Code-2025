@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    ifstream file("input.txt");
+     file("input.txt");
     if (!file.is_open()) {
         cout << "Its over twin :(";
         return 1;
@@ -36,7 +36,7 @@ int main() {
             if (num >= startNend[i].first && num <= startNend[i].second) {
                 availableIDs++;
                 break;
-            }
+            }ifstream
         }
 
     }
