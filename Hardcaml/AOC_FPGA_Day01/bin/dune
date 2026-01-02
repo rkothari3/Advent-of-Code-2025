@@ -1,0 +1,4 @@
+(executable
+ (name main)
+ (libraries core hardcaml hardcaml_waveterm dial)
+ (preprocess (pps ppx_jane)))
